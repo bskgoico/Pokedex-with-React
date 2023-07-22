@@ -1,11 +1,18 @@
-
+import { useState } from "react";
+import { searchPokemon } from "../api";
 
 const SearchBar = () => {
-    let search = "";
+    
+    const [search, setSearch] = useState('');
 
     const onChange = (evt) => {
         console.log(evt.target.value);
-        search = evt.taget.value;
+        setSearch(evt.taget.value);
+    }
+
+    const onClick = async (evt) => {
+        const data = await searchPokemon(search);
+        console.log(data);
     }
 
     return (
@@ -14,7 +21,7 @@ const SearchBar = () => {
                 <input placeholder="Buscar Pokemon..." onChange={onChange} />
             </div>
             <div>
-                {search}
+                <button onClick={onClick}>Buscar</button>
             </div>
         </div>
     );
